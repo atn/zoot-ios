@@ -1,10 +1,11 @@
-import { EventEmitter } from 'events'
+  import { EventEmitter } from 'events'
 import Pusher, {Channel} from 'pusher-js/react-native'
 
 Pusher.logToConsole = true;
 
 export interface ZootManager {
   userId: string
+  name: string
   Pusher: Pusher
   channel: Channel
 
@@ -16,6 +17,7 @@ export class ZootManager extends EventEmitter {
   constructor(userId: string) {
     super()
     this.userId = userId
+    this.name = ""
   }
 
   listenForMovements() {
@@ -33,7 +35,7 @@ export class ZootManager extends EventEmitter {
   }
 
   async move(x: number, y: number) {
-    const res = await fetch('https://zoot-api.bruhaustin.repl.co/v1/move', { method: 'POST', body: JSON.stringify({userId: this.userId, x, y})})
+    const res = await fetch('https://zoot-api.bruhaustin.repl.co/v1/move', { method: 'POST', body: JSON.stringify({userId: this.userId, name: this.name, x, y})})
     const json = await res.json()
     console.log(json)
   }
@@ -42,6 +44,7 @@ export class ZootManager extends EventEmitter {
 export interface Movement {
   userId: string,
   movementId: string,
+  name: string,
   x: number,
   y: number
 }

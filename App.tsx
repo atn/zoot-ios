@@ -11,7 +11,6 @@ export default function App() {
   function Index() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={{color: '#fff', marginLeft: 20, fontWeight: '700', fontSize: 30}}>zoot</Text>
         <ZootView />
       </SafeAreaView>
     )
