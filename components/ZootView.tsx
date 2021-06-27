@@ -23,8 +23,9 @@ export function ZootView() {
         if (movement.userId === manager.userId) return;
         setMovements(movements => movements.filter(function(el) { return el.userId != movement.userId; }))
         setMovements(movements => [...movements, movement])
-        if (movement.type === 'start' || movement.type === 'end') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+        if (movement.type === 'start') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
         setTimeout(() => {
+          if (movement.type === 'end') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
           setMovements(movements => movements.filter(function(el) { return el.movementId != movement.movementId; }))
         }, 100)
       })
